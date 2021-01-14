@@ -1,0 +1,10 @@
+Log      2021-1-13-18-45-37 hello world.
+Critical 2021-1-13-18-45-37 hello kkkkkk.
+Critical 2021-1-13-18-45-37 hello jjjjjj.
+Critical 2021-1-13-18-45-37 hello ffffff.
+Log      2021-1-13-18-45-37 hello world.111
+Log      2021-1-13-18-45-37 hello world.112
+Log      2021-1-13-18-45-37 hello world.333
+Debug 2021-1-13-18-45-37 im debug 1
+Debug 2021-1-13-18-45-37 im debug 2
+Debug 2021-1-13-18-45-37 im debug 3
