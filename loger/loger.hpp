@@ -7,7 +7,7 @@
 #define completed_prefix stream_buf << prefix << GetTimeStr() << " "
 #define LOG_PATH "./log/"
 
-class Loger
+struct Loger
 {
 public:
 	Loger(std::string _prefix = "Log      ") { prefix = _prefix;}
@@ -23,33 +23,15 @@ public:
 	{
 		if (stream_buf.str().empty()) 
 			completed_prefix;
-		//std::string current = GetTimeStr_Day();
-		//static std::string pre = "";
-		//if (pre != current)
-		//{
-		//	if (out_file.is_open())				
-		//		out_file.close();
-		//	std::string temp = current;
-		//	temp.append(".txt");
-		//	out_file.open(temp, std::ios::app);
-		//	pre = current;
-		//}
-		check_touch_file();
-		
-		//删除超期日志
-		static uint16_t count = 1;
-		if(0 == count % 100)
-			del_overdue_file(string(LOG_PATH), 60*60*2);
-		count++;
-
+		check_touch_file();		
 		stream_buf << t;		
 		return *this;
 	}
 
 	void check_touch_file()
 	{
-		//std::string current = GetTimeStr_Day();
-		std::string current = GetTimeStr_Hour();
+		std::string current = GetTimeStr_Day();
+		//std::string current = GetTimeStr_Hour();
 		static std::string pre = "";
 		if (pre != current)
 		{
@@ -60,6 +42,12 @@ public:
 			temp.insert(0, string(LOG_PATH));
 			out_file.open(temp, std::ios::app);
 			pre = current;
+
+			//删除超期日志
+			static uint16_t count = 1;
+			if (0 == count % 7)
+				del_overdue_file(string(LOG_PATH), 60 * 60 * 24 * 7);
+			count++;
 		}
 	}
 
@@ -79,7 +67,7 @@ public:
 private:
 	static std::stringstream stream_buf;
 	static std::ofstream out_file;
-};
+} loger;
 
 std::stringstream Loger::stream_buf;
 std::ofstream Loger::out_file;
@@ -110,6 +98,5 @@ template<typename T>
 Loger& operator<< (const T& t)
 */
 
-Loger loger;
 
 
